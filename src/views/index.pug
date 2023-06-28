@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  div(class="container")
+    h2(class="pb-2 border-bottom")="MyBank"
+      if isLoggedIn
+        small
+          a(href="/logout")="Logout"
+
+    div(class="row")
+      div(class="col")
+        a(href="/balance")="View Account Balance"
+
+      div(class="col")
+        a(href="/account")="View Account Number"
+
+      div(class="col")
+        a(href="/contact")="Contact Us"
