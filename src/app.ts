@@ -3,10 +3,9 @@ import express, {Express, NextFunction, Request, Response} from 'express'
 import session from 'express-session'
 import bodyParser from 'body-parser'
 
-
 import path from 'path'
 
-import morganLogger from "./morganLogger";
+import morganLogger from "./util/morganLogger";
 
 require('dotenv').config()
 
