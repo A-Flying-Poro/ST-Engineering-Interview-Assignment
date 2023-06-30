@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  app:
+    build: ./
+    image: webapp
+    container_name: webapp
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - "3020"
+    networks:
+      webapp:
+    env_file:
+      - .env
+    environment:
+      PORT: 3020
+
+      TZ: Asia/Singapore
+
+  db:
+    image: mysql:8
+    container_name: webapp-db
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - "13306:3306"
+    networks:
+      webapp:
+    volumes:
+      - webapp-db:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d:ro
+    env_file:
+      - .env
+    environment:
+      TZ: Asia/Singapore
+
+volumes:
+  webapp-db:
+
+networks:
+  webapp:
+    name: "webapp"
