@@ -2,10 +2,13 @@ extends layout
 
 block content
   div(class="container")
-    h2(class="pb-2 border-bottom")="MyBank"
-      if isLoggedIn
-        small
-          a(href="/logout")="Logout"
+    div(class="pb-2 border-bottom")
+      h2="MyBank"
+      div(class="text-end")
+        if user != null
+          a(href="/logout" class="btn btn-primary")="Logout"
+        else
+          a(href="/login" class="btn btn-primary")="Login"
 
     div(class="row")
       div(class="col")
@@ -16,3 +19,6 @@ block content
 
       div(class="col")
         a(href="/contact")="Contact Us"
+
+      div(class="col")
+        a(href="/account")="Account"

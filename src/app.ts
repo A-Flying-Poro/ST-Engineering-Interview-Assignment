@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import path from 'path'
 
 import morganLogger from "./util/morganLogger";
+import User from "./model/User";
 
 require('dotenv').config()
 
@@ -21,6 +22,14 @@ if (sessionSecret == null) {
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+
+// Setup session structure
+declare module 'express-session' {
+    interface SessionData {
+        user: User | null;
+        messages: string[] | null;
+    }
+}
 
 // Morgan + Winston logger
 app.use(morganLogger)
