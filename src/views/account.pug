@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  div(class="container")
+    div(class="pb-2 border-bottom")
+      h2="MyBank"
+      div(class="text-end")
+        if user != null
+          a(href="/logout" class="btn btn-primary")="Logout"
+        else
+          a(href="/login" class="btn btn-primary")="Login"
+
+    .d-flex.flex-column.mt-5
+      if (messages != null)
+        each message in messages
+          if message.toLowerCase().startsWith('error')
+            .alert.alert-danger.alert-dismissible.fade.show=message
+          else
+            .alert.alert-success.alert-dismissible.fade.show=message
+
+      h3="Account Management"
+
+      form.my-2(method="post")
+        input(hidden="hidden" value=user.userId name="userId")
+
+        .my-2
+          span.form-label.fw-bold= "Username"
+          .border.rounded.p-2
+            span=user.username
+
+        .my-2
+          span.form-label.fw-bold= "Email"
+          input.form-control(value=user.email name="email")
+
+        .my-2
+          button.btn.btn-success(type="submit")= "Update"
